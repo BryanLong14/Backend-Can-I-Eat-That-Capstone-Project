@@ -15,3 +15,6 @@ npm start local host:3000
 ```sh
 npm run dev #starts nodemon on post: 3000
 ```
+
+## foodToAvoidSchema
+!()[https://www.lucidchart.com/publicSegments/view/736a76cc-5aa3-402c-a6ef-d86a230d979c/image.png] 

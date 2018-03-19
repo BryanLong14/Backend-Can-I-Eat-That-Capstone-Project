@@ -1,24 +1,28 @@
-const express = require('express');
-const logger = require('morgan');
-const cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser');
+const express = require("express");
+const logger = require("morgan");
+const cookieParser = require("cookie-parser");
+const bodyParser = require("body-parser");
 
 const app = express();
 
-app.use(logger('dev'));
+const foods = require("./api/foods");
+
+app.use(logger("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.get('/', (req, res) => {
+app.get("/", (req, res) => {
   res.json({
     message: "Hello from Can I Eat That API -Capstone"
   });
 });
 
+app.use("/api/foods", foods);
+
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
-  const err = new Error('Not Found');
+  const err = new Error("Not Found");
   res.status(404);
   next(err);
 });
@@ -28,7 +32,7 @@ app.use((err, req, res, next) => {
   res.status(res.statusCode || 500);
   res.json({
     message: err.message,
-    stack: req.app.get('env') === 'development' ? err.stack : {}
+    stack: req.app.get("env") === "development" ? err.stack : {}
   });
 });
 

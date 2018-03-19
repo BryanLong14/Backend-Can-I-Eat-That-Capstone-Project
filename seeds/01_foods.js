@@ -1,4 +1,3 @@
-
 exports.seed = async function(knex, Promise) {
   await knex('food_to_avoid').del();
   await knex('food_to_avoid').insert([

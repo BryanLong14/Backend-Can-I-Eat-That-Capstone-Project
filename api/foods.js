@@ -23,4 +23,31 @@ router.get("/:id", (req, res, next) => {
     .catch(next);
 });
 
+router.post("/", (req, res, next) => {
+    queries
+      .create(req.body) 
+      .then(id => {
+        res.status(201).json(id);
+      })
+      .catch(next);
+});
+
+router.put("/:id", (req, res, next) => {
+    queries
+      .update(req.params.id, food)
+      .then(() => {
+        res.json({ message: "Updated food :)" });
+      })
+      .catch(next);
+});
+
+router.delete("/:id", (req, res, next) => {
+    queries
+      .delete(req.params.id)
+      .then(() => {
+        res.json({ message: "Deleted Food :)" });
+      })
+      .catch(next);
+});
+
 module.exports = router;

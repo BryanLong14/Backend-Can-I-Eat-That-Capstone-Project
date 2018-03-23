@@ -3,10 +3,10 @@ const logger = require("morgan");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-
 const app = express();
 
 const foods = require("./api/foods");
+const scan = require("./api/scan");
 
 app.use(logger("dev"));
 app.use(bodyParser.json());
@@ -21,16 +21,17 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/foods", foods);
+app.use("/api/scan", scan);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
   const err = new Error("Not Found");
-  res.status(404);
-  next(err);
+  res.status(404).send({ message: "URL not found: " + req.originalUrl })
 });
 
 // error handler
 app.use((err, req, res, next) => {
+  console.log(err);
   res.status(res.statusCode || 500);
   res.json({
     message: err.message,
